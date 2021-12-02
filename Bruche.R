@@ -1,9 +1,11 @@
-setwd("F:/MA1 2021-2022/Acquisition  des donées/TP bruches")
+setwd("F:/MA1 2021-2022/Acquisition  des donÃ©es/TP bruches")
 getwd()
+
+#Chi^2: 
 
 data = data.frame(matrix(nrow=7, ncol=2))
 colnames(data) = c("legumineuses","oeufs")
-data$legumineuses = as.factor(c("pois_chiche","haricot_rouge","niébé","lentille","aduki","mungo","boite"))
+data$legumineuses = as.factor(c("pois_chiche","haricot_rouge","niÃ©bÃ©","lentille","aduki","mungo","boite"))
 data$oeufs = c(5,1,8,0,8,7,5)
 frequences_attendues = c(1/7, 1/7, 1/7, 1/7, 1/7, 1/7, 1/7)
 valeurs_attendues = sum(data$oeufs)*frequences_attendues
@@ -15,7 +17,7 @@ pchisq(chi2, ddl, lower.tail=FALSE)
 tab1 = read.csv("BQ1C.csv", head=TRUE, sep=";")
 head(tab1)
 str(tab1)
-tab2 = tab1; tab2[,] = NA # création d'un nouveau tableau aux dimensions de tab1
+tab2 = tab1; tab2[,] = NA # crÃ©ation d'un nouveau tableau aux dimensions de tab1
 for (i in 1:dim(tab1)[1])
 {
   tab2[i,] = tab1[i,]/sum(tab1[i,])
@@ -29,11 +31,11 @@ myANOVA = aov(lm(proportions_oeufs ~ legumineuses))
 
 qqnorm(residuals(myANOVA)); qqline(residuals(myANOVA))
 shapiro.test(residuals(myANOVA))
-# p-value = 0.001403 donc pas normalement distribuées 
+# p-value = 0.001403 donc pas normalement distribuÃ©es 
 bartlett.test(proportions_oeufs ~ legumineuses)
-#p-value < 2.2e-16 donc hétéroscédasticité 
+#p-value < 2.2e-16 donc hÃ©tÃ©roscÃ©dasticitÃ© 
 kruskal.test(proportions_oeufs ~ legumineuses) 
-# p-value < 2.2e-16 donc différence statistiquement très signifcative entre les distributions 
+# p-value < 2.2e-16 donc diffÃ©rence statistiquement trÃ¨s signifcative entre les distributions 
 
 shapiro.test(tab2[,"Aduki"])
 #W = 0.96609, p-value = 0.1389
@@ -46,8 +48,8 @@ wilcox.test(tab2[,"Aduki"], tab2[,"Mungo"], paired=T)
 #p-value = 0.004107
 
 
-##Question2 diff niébé ##
-
+##Question2 diff niÃ©bÃ© ##
+#Chi^2
 data = data.frame(matrix(nrow=8, ncol=2))
 colnames(data) = c("legumineuses","oeufs")
 data$legumineuses = as.factor(c("niebe_1","niebe_2","niebe_3","niebe_4",
@@ -61,8 +63,9 @@ ddl = length(data$legumineuses)-1
 pchisq(chi2, ddl, lower.tail=FALSE)
 # 7.084505e-05 pour jour 2 et pour jour 1 1.133731e-09
 
+#Tests de diffÃ©rences entre graines
 tab1=read.csv("BQ2C.csv", head=T, sep=";")
-tab1=tab1[-c(17),]
+#tab1=tab1[-c(17),]
 tab2 = tab1; tab2[,] = NA 
 for (i in 1:dim(tab1)[1])
 {
@@ -76,11 +79,35 @@ myANOVA = aov(lm(proportions_oeufs ~ graines))
 
 qqnorm(residuals(myANOVA)); qqline(residuals(myANOVA))
 shapiro.test(residuals(myANOVA))
-#W = 0.77019, p-value = 3.692e-14 donc pas normalement distribuées 
+#W = 0.77019, p-value = 3.692e-14 donc pas normalement distribuÃ©es 
 bartlett.test(proportions_oeufs ~ graines)
 #p-value = 8.491e-12
 kruskal.test(proportions_oeufs ~ graines) 
 #p-value = 0.06772
+
+
+
+
+
+
+#Test pontes entre T1 et T2:
+tab1 = RatioP
+proportions_oeufs = c(tab1[,1],tab1[,2],tab1[,3],tab1[,4],tab1[,5],tab1[,6])
+n = dim(tab1)[1] 
+legumineuses = colnames(tab1)[c(rep(1,n),rep(2,n),rep(3,n),rep(4,n),rep(5,n),rep(6,n))]
+
+boxplot(proportions_oeufs~legumineuses)
+
+kruskal.test(proportions_oeufs~legumineuses)
+
+#POUR TEST PAIRE: IMPORTANT
+pairwise.wilcox.test(proportions_oeufs , legumineuses, p.adjust.method = "none", paired=TRUE)
+#none : pas de correction
+
+
+
+
+
 
 ##Question3 parasite/vierge## 
 
@@ -108,7 +135,7 @@ tab2 = matrix(nrow=dim(tab1)[1], ncol=2)
 colnames(tab2) = c("niebe_vierge","niebe_parasite")
 for (i in 1:dim(tab1)[1])
 {
-  tab2[i,"niebe_vierge"] = tab1[i,"niebe_vierge_1"]+tab1[i,"niebe_vierge_2"]       #erreur à ce stade 
+  tab2[i,"niebe_vierge"] = tab1[i,"niebe_vierge_1"]+tab1[i,"niebe_vierge_2"]       #erreur Ã  ce stade 
   tab2[i,"niebe_parasite"] = tab1[i,"niebe_parasite_1"]+tab1[i,"niebe_parasite_2"]
 }
 for (i in 1:dim(tab2)[1])
@@ -158,7 +185,7 @@ myANOVA = aov(lm(proportions_zone ~ zone))
 
 qqnorm(residuals(myANOVA)); qqline(residuals(myANOVA))
 shapiro.test(residuals(myANOVA))
-#W = 0.95601, p-value = 0.03012 donc pas normalement distribuées 
+#W = 0.95601, p-value = 0.03012 donc pas normalement distribuÃ©es 
 bartlett.test(proportions_zone ~ zone)
 #p-value = p-value = 0.05955
 kruskal.test(proportions_zone ~ zone) 
