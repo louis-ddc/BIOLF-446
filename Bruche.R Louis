@@ -10,7 +10,7 @@ valeurs_attendues = sum(data$oeufs)*frequences_attendues
 chi2 = sum(((data$oeufs-valeurs_attendues)^2)/valeurs_attendues)
 ddl = length(data$legumineuses)-1
 pchisq(chi2, ddl, lower.tail=FALSE)
-"j1 0.02337877 | j2 3.043214e-12  avec boite j1 0.04397964 | j2 2.090214e-15 "
+#"j1 0.02337877 | j2 3.043214e-12  avec boite j1 0.04397964 | j2 2.090214e-15 "
 
 tab1 = read.csv("BQ1C.csv", head=TRUE, sep=";")
 head(tab1)
