@@ -5,6 +5,8 @@ Test paramétriques :
   *bartlett.test*
     Se fait pour tester l'homoscédasticité  
     H0 : Il n'y a pas de différence entre les variances 
+   *t.test*
+    Se fait pour comparere les moyennes de deux échantillons appariés.
 
 Tests non-paramétriques :
 
