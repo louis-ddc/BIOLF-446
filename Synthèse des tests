@@ -5,6 +5,7 @@ Tests non-paramétriques :
     H0 : Toutes les distributions sont égales 
     H1 : Au moins une des distributions n’est pas égale 
     Si p<5% on rejette H0
-
+    
+       
       
   
