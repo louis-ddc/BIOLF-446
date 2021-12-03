@@ -128,33 +128,22 @@ ddl = length(data$niebe)-1
 pchisq(chi2, ddl, lower.tail=FALSE)
 #2.580284e-08
 
-tab1 = read.csv("BQ3C.csv", head=TRUE, sep=";")
-tab1 = tab1[-c(17,18),]
+#Sommes et proportions faites sur excel avec deux colonnes une pour vierge et une pourparasitée avec les prop pour chaque binômes
+tab1=Parasite
+Prop = c(tab1[,1],tab1[,2])
+n = dim(tab1)[1] 
+legumineuses = colnames(tab1)[c(rep(1,n),rep(2,n))]
 
-tab2 = matrix(nrow=dim(tab1)[1], ncol=2)
-colnames(tab2) = c("niebe_vierge","niebe_parasite")
-for (i in 1:dim(tab1)[1])
-{
-  tab2[i,"niebe_vierge"] = tab1[i,"niebe_vierge_1"]+tab1[i,"niebe_vierge_2"]       #erreur à ce stade 
-  tab2[i,"niebe_parasite"] = tab1[i,"niebe_parasite_1"]+tab1[i,"niebe_parasite_2"]
-}
-for (i in 1:dim(tab2)[1])
-{
-  tab2[i,] = tab2[i,]/sum(tab2[i,])
-}
-boxplot(tab2)
-proportions_oeufs = c(tab2[,1],tab2[,2])
-n=dim(tab2)[1]
-niebe = colnames(tab2)[c(rep(1,n),rep(2,n))]
-myANOVA = aov(lm(proportions_oeufs ~ niebe))
+boxplot(Prop~legumineuses)
 
+myANOVA = aov(lm(Prop ~ legumineuses))
 qqnorm(residuals(myANOVA)); qqline(residuals(myANOVA))
-shapiro.test(residuals(myANOVA))
-#W = , p-value =  
-bartlett.test(proportions_oeufs ~ niebe)
-#p-value = 
-kruskal.test(proportions_oeufs ~ niebe) 
-#p-value = 
+shapiro.test(residuals(myANOVA)) 
+bartlett.test(Prop ~ legumineuses) 
+
+
+kruskal.test(Prop~legumineuses)#P-val = 0.9568
+
 
 
 ##Question4 perle##
