@@ -1,0 +1,10 @@
+Tests non-paramétriques :
+
+  *kruskal.test*
+    Se fait pour tester chaque unité expérimentale, c’est une analyse entre les sujets
+    H0 : Toutes les distributions sont égales 
+    H1 : Au moins une des distributions n’est pas égale 
+    Si p<5% on rejette H0
+
+      
+  
