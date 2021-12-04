@@ -3,7 +3,7 @@ Test paramétriques :
     Se fait pour tester la normalité des résidus, check si les conditions d'ulisation de l'ANOVA sont respéctées
     H0 : Les résidus ont une distribution normale 
   *bartlett.test*
-    Se fait pour tester l'homoscédasticité  
+    Se fait pour tester l'homoscédasticité (on considère que les résidus ont une distribution normale de moyenne nulle et d’écart type constant)
     H0 : Il n'y a pas de différence entre les variances 
    *t.test*
     Se fait pour comparere les moyennes de deux échantillons appariés.
