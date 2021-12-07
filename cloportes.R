@@ -83,6 +83,22 @@ boxplot(frequence~sexe.quartier, data=exp1.1,
         main="Fréquence d'observation des individus mâle et femelle en fonction du quartier",
         col=c("skyblue","palegreen3","mediumvioletred","yellow2")
         )
+#-----------------------------------------------------#
+2.3Mâles) 
+tab3 = read.csv("2.3M.csv", head=TRUE, sep=";")
+frequence_obs = c(tab3[,1],tab3[,2],tab3[,3],tab3[,4])
+n = dim(tab3)[1] 
+quartier = colnames(tab3)[c(rep(1,n),rep(2,n),rep(3,n),rep(4,n))]
+myANOVA = aov(lm(frequence_obs ~ quartier))
+qqnorm(residuals(myANOVA)); qqline(residuals(myANOVA))
+shapiro.test(residuals(myANOVA))
+bartlett.test(frequence_obs ~ quartier)
+kruskal.test(frequence_obs ~ quartier) 
+boxplot(frequence_obs~quartier,
+        xlab ="quartier", 
+        ylab ="Fréquence d'observation", 
+        main="Fréquence d'observation des individus mâles par quartiers", 
+        col="mistyrose3")
 
 
 
