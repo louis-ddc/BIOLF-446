@@ -179,3 +179,10 @@ bartlett.test(proportions_zone ~ zone)
 #p-value = p-value = 0.05955
 kruskal.test(proportions_zone ~ zone) 
 # Kruskal-Wallis chi-squared = 3.7027, df = 2, p-value = 0.157
+#------------------------------------------------------------------#
+Boxplot de la frequence d'observation' des individus en fonction du quartier
+tab1=exp1.2
+frequence_obs = c(tab1[,1],tab1[,2],tab1[,3],tab1[,4])
+n = dim(tab1)[1] 
+quartier = colnames(1)[c(rep(1,n),rep(2,n),rep(3,n),rep(4,n))]
+boxplot(tab1)
