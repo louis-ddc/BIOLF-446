@@ -1,4 +1,7 @@
-Code couleur pour les différents quartiers :
+#Code couleur général: 
+mistyrose3
+
+#Code couleur pour les différents quartiers :
 skyblue = AC
 palegreen3 = AF 
 mediumvioletred = QH
