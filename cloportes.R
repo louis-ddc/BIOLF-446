@@ -1,6 +1,13 @@
 #Code couleur général: 
 mistyrose3
 
+#Ligne de code pour les boxplots: attention modifier axes et titres en fonction:
+boxplot(frequence~quartier, data = Bin, 
+        xlab ="quartiers", 
+        ylab ="Fréquence d'observation", 
+        main="Fréquence d'observation des individus par quartiers", 
+        col="mistyrose3")
+
 #Code couleur pour les différents quartiers :
 skyblue = AC
 palegreen3 = AF 
