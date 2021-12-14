@@ -1,0 +1,22 @@
+Test chi² pour le choix du sexe de la blatte pour les garçons.
+data = data.frame(matrix(nrow=2, ncol=2))
+colnames(data) = c("garçon","sexe_blatte")
+data$sexe_blatte = as.factor(c("mâle","femelle"))
+data$nombresexe = c(3,8)
+frequences_attendues = c(1/2, 1/2)
+valeurs_attendues = sum(data$nombresexe)*frequences_attendues
+chi2 = sum(((data$nombresexe-valeurs_attendues)^2)/valeurs_attendues)
+ddl = 1
+pchisq(chi2, ddl, lower.tail=FALSE)
+//résultat : 0.131668
+Test chi² pour le choix du sexe de la blatte pour les filles.
+data = data.frame(matrix(nrow=2, ncol=2))
+colnames(data) = c("filles","sexe_blatte")
+data$sexe_blatte = as.factor(c("mâle","femelle"))
+data$nombresexe = c(10,12)
+frequences_attendues = c(1/2, 1/2)
+valeurs_attendues = sum(data$nombresexe)*frequences_attendues
+chi2 = sum(((data$nombresexe-valeurs_attendues)^2)/valeurs_attendues)
+ddl = 1
+pchisq(chi2, ddl, lower.tail=FALSE)
+//résultat : 0.6698154
