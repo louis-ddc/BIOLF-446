@@ -36,3 +36,82 @@ boxplot(performance~o,
         ylab ="Performance", 
         main="Performance en fonction du temps de projection de l'image", 
         col="mistyrose3")
+
+#-----------------------------------------------------------------------------#
+#"papillon 2.
+tab2 = read.csv("papi2.csv", head=TRUE, sep=";")
+
+performance = c(tab2[,1])
+nombre_papillon = c(tab2[,2])
+data.frame(performance,nombre_papillon)
+
+#o = ordered(tab2$temps, levels=c("0","1","2","3","4","5","6","7","8","9"))
+#o
+
+boxplot(performance~nombre_papillon,
+        xlab ="nombre de papillons sur l'image", 
+        ylab ="Performance", 
+        main="Performance en fonction du nombre de papillons sur l'image", 
+        col="mistyrose3")
+
+myANOVA = aov(lm(performance ~ temps_projection))
+qqnorm(residuals(myANOVA)); qqline(residuals(myANOVA))
+shapiro.test(residuals(myANOVA))
+bartlett.test(performance ~ temps_projection)
+
+kruskal.test(performance ~ temps_projection) 
+pairwise.wilcox.test(performance, temps_projection, p.adjust.method = "none", paired=FALSE)
+
+#-------------------------------------------------------------"------------#
+#2.3 Papi
+
+tab3 = read.csv("papi3.csv", head=TRUE, sep=";")
+
+performance = c(tab3[,1])
+informations = c(tab3[,2])
+data.frame(performance,informations)
+
+#o = ordered(tab2$temps, levels=c("0","1","2","3","4","5","6","7","8","9"))
+#o
+
+boxplot(performance~informations,
+        xlab ="Informations", 
+        ylab ="Performance", 
+        main="Performance en fonction du nombre d'informations sur l'image", 
+        col="mistyrose3")
+
+
+myANOVA = aov(lm(performance ~ informations))
+qqnorm(residuals(myANOVA)); qqline(residuals(myANOVA))
+shapiro.test(residuals(myANOVA))
+bartlett.test(performance ~ informations)
+
+kruskal.test(performance ~ informations) 
+pairwise.wilcox.test(performance, informations, p.adjust.method = "none", paired=FALSE)
+
+#-----------------------------------------------------#
+#2.4 papi4 
+tab4 = read.csv("papi4.csv", head=TRUE, sep=";")
+
+performance = c(tab4[,1])
+sexe = c(tab4[,2])
+data.frame(performance,sexe)
+
+#o = ordered(tab2$temps, levels=c("0","1","2","3","4","5","6","7","8","9"))
+#o
+
+boxplot(performance~sexe,
+        xlab ="sexe", 
+        ylab ="Performance", 
+        main="Performance en fonction du sexe", 
+        col="mistyrose3")
+
+
+myANOVA = aov(lm(performance ~ sexe))
+qqnorm(residuals(myANOVA)); qqline(residuals(myANOVA))
+shapiro.test(residuals(myANOVA))
+bartlett.test(performance ~ sexe)
+
+kruskal.test(performance ~ sexe) 
+pairwise.wilcox.test(performance, sexe, p.adjust.method = "none", paired=FALSE)
+fisher.test(tab4)
