@@ -20,3 +20,19 @@ chi2 = sum(((data$nombresexe-valeurs_attendues)^2)/valeurs_attendues)
 ddl = 1
 pchisq(chi2, ddl, lower.tail=FALSE)
 //résultat : 0.6698154
+
+Expérience papillons 
+tab1 = read.csv("tab2.csv", head=TRUE, sep=";")
+
+performance = c(tab1[,1])
+temps_projection = c(tab1[,2])
+data.frame(performance,temps_projection)
+
+o = ordered(tab1$temps, levels=c("une","deux","trois"))
+o
+
+boxplot(performance~o,
+        xlab ="temps de projection (en seconde)", 
+        ylab ="Performance", 
+        main="Performance en fonction du temps de projection de l'image", 
+        col="mistyrose3")
