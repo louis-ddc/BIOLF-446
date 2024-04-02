@@ -1,0 +1,42 @@
+library(tidyverse)
+library(readxl)
+library(FactoMineR)
+library(ggplot2)
+library(tidyverse)
+
+data <- read_excel("chemin/vers/votre/fichier.xlsx")
+
+# critère = nom de la colonne 
+data_acp <- data %>%
+  select(c(critere1, critere2, critere3))
+
+acp_result <- data_acp %>%
+  PCA()
+
+summary(acp_result)
+
+plot(acp_result, choix = "var")
+
+ind_coord <- as.data.frame(acp_result$ind$coord)
+var_coord <- as.data.frame(acp_result$var$coord)
+ind_contrib <- as.data.frame(acp_result$ind$contrib)
+var_contrib <- as.data.frame(acp_result$var$contrib)
+
+#### ggplot2
+# Convertir les coordonnées des individus en un format ggplot2
+ind_coord_plot <- as.data.frame(acp_result$ind$coord) %>%
+  rownames_to_column(var = "Individus") %>%
+  rename_all(~gsub("\\.", "_", .))
+
+ggplot(ind_coord_plot, aes(x = Dim.1, y = Dim.2)) +
+  geom_point() +
+  labs(x = "1ère composante principale",
+       y = "2ème composante principale",
+       title = "Représentation des individus dans l'espace des composantes principales")
+
+ggplot(ind_coord_plot, aes(x = Dim.1, y = Dim.2, label = Individus)) +
+  geom_point() +
+  geom_text_repel() +  
+  labs(x = "1ère composante principale",
+       y = "2ème composante principale",
+       title = "Représentation des individus dans l'espace des composantes principales + label")
